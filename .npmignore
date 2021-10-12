@@ -1,0 +1,8 @@
+node_modules
+.yarn
+.github
+.vscode
+.editorconfig
+.gitattributes
+.travis.yml
+tsconfig.json
