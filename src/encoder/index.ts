@@ -1,28 +1,47 @@
 import ffmpeg from 'fluent-ffmpeg';
 import path from 'path';
+import pc from 'picocolors';
 import ProgressBar from 'progress';
 import { ffmpegWithCodec } from './presets';
+
+function log (message: string) {
+  console.log(`${pc.magenta('[ffmpeg]')} ${message}`);
+}
+
+function createProgressBar () : ProgressBar {
+  return new ProgressBar(
+    `${pc.magenta('[ffmpeg]')} Processing : [${pc.gray(':bar')}] ${pc.magenta(':percent')} - ETA : ${pc.magenta(':etas')}`,
+    {
+      complete: '=',
+      incomplete: ' ',
+      width: 20,
+      total: 100
+    }
+  );
+}
 
 export function encode (file: string, codec: string) {
   return new Promise((resolve, reject) => {
     const extname = path.extname(file);
+    const destination = file.replace(new RegExp(`${extname}$`), `.${codec}`);
     let bar : ProgressBar;
 
     ffmpegWithCodec(ffmpeg(file), codec)
       .on('start', (commandLine) => {
-        console.log(`Spawned Ffmpeg with command: ${commandLine}`);
+        log(`Spawn with the command ${pc.gray(pc.italic(commandLine))}`);
       })
       .on('codecData', function (data) {
-        console.log(`Input is ${data.audio} audio with ${data.video} video`);
+        if (data.video) {
+          log('The input is a video file :' +
+            pc.gray(`\n\t- format : ${data.format}\n\t- duration : ${data.duration}\n\t- audio : ${data.audio_details}\n\t- video : ${data.video_details}`));
+        } else {
+          log('The input is an audio file :' +
+            pc.gray(`\n\t- format : ${data.format}\n\t- duration : ${data.duration}\n\t- audio : ${data.audio_details}`));
+        }
       })
       .on('progress', function (progress) {
         if (bar === undefined) {
-          bar = new ProgressBar('Processing: [:bar] :percent - ETA: :etas', {
-            complete: '=',
-            incomplete: ' ',
-            width: 20,
-            total: 100
-          });
+          bar = createProgressBar();
         }
 
         bar.update(progress.percent / 100);
@@ -31,6 +50,7 @@ export function encode (file: string, codec: string) {
         reject(err);
       })
       .on('end', function (stdout, stderr) {
+        log(`Conversion complete : ${pc.gray(destination)}`);
         resolve(stdout);
       })
       .save(file.replace(new RegExp(`${extname}$`), `.${codec}`));

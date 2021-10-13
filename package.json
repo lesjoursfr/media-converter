@@ -27,6 +27,7 @@
 	},
 	"dependencies": {
 		"fluent-ffmpeg": "^2.1.2",
+		"picocolors": "^1.0.0",
 		"progress": "^2.0.3",
 		"yargs": "^17.2.1"
 	},
