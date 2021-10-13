@@ -9,7 +9,7 @@ export function configure (ffmpeg: FfmpegCommand) : FfmpegCommand {
     .audioChannels(2)
     .outputOptions([
       // https://ffmpeg.org/ffmpeg-codecs.html#aac
-      '-aac_coder twoloop', // Two loop searching (TLS) method
+      '-aac_coder fast', // Constant quantizer method
       '-profile:a aac_low', // The default, AAC "Low-complexity" profile
       '-movflags +faststart' // AAC Progresive download : https://trac.ffmpeg.org/wiki/Encode/AAC#Progressivedownload
     ]);
