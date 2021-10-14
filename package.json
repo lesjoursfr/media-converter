@@ -15,6 +15,9 @@
 	"bugs": {
 		"url": "https://github.com/lesjoursfr/media-converter/issues"
 	},
+	"publishConfig": {
+		"access": "public"
+	},
 	"engines": {
 		"node": ">=v14.18.1"
 	},
