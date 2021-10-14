@@ -1,4 +1,4 @@
-[![NPM version](https://badge.fury.io/js/@lesjoursfr/media-converter.svg)](http://badge.fury.io/js/@lesjoursfr/media-converter)
+[![npm version](https://badge.fury.io/js/@lesjoursfr%2Fmedia-converter.svg)](https://badge.fury.io/js/@lesjoursfr%2Fmedia-converter)
 [![Build Status](https://travis-ci.org/lesjoursfr/media-converter.svg?branch=stable)](https://travis-ci.org/lesjoursfr/media-converter)
 
 media-converter
