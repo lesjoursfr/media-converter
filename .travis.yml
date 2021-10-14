@@ -11,11 +11,6 @@ jobs:
     dist: focal
     node_js: '14'
     script: npx tsc
-  - stage: Build project
-    name: Build the project on Windows with NodeJS 14
-    os: windows
-    node_js: '14'
-    script: npx tsc
   - stage: Release to NPM
     name: Publish the package to the npmjs repository
     os: linux
