@@ -23,7 +23,7 @@
 		"build": "npx tsc"
 	},
 	"bin": {
-		"ljconverter": "dist/index.js"
+		"ljconverter": "bin/index.js"
 	},
 	"dependencies": {
 		"fluent-ffmpeg": "^2.1.2",
