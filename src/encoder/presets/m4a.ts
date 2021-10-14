@@ -4,12 +4,12 @@ export function configure (ffmpeg: FfmpegCommand) : FfmpegCommand {
   ffmpeg
     .format('mp4')
     .noVideo()
-    .audioBitrate('320k')
+    .audioBitrate('256k')
     .audioCodec('aac')
     .audioChannels(2)
     .outputOptions([
       // https://ffmpeg.org/ffmpeg-codecs.html#aac
-      '-aac_coder fast', // Constant quantizer method
+      '-aac_coder twoloop', // Two loop searching (TLS) method
       '-profile:a aac_low', // The default, AAC "Low-complexity" profile
       '-movflags +faststart' // AAC Progresive download : https://trac.ffmpeg.org/wiki/Encode/AAC#Progressivedownload
     ]);

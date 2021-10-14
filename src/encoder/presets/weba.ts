@@ -4,7 +4,7 @@ export function configure (ffmpeg: FfmpegCommand) : FfmpegCommand {
   ffmpeg
     .format('webm')
     .noVideo()
-    .audioBitrate('320k')
+    .audioBitrate('256k')
     .audioCodec('libopus')
     .audioChannels(2)
     .outputOptions([
