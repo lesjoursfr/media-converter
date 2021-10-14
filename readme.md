@@ -9,8 +9,8 @@ An audio/video converter using [fluent-ffmpeg](https://www.npmjs.com/package/flu
 ## Audio
 
 The audio converter output 2 files :
- - An m4a file with ACC @ 320kbps
- - A weba file with Opus @ 320kbps
+ - An m4a file with ACC @ 256kbps
+ - A weba file with Opus @ 256kbps
 
 Usage
 
