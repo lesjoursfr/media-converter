@@ -15,7 +15,7 @@ The audio converter output 2 files :
 Usage
 
 ```bash
-ljconverter audio --file sound.wav
+ljconverter audio sound.wav
 ```
 
 ## Video
