@@ -1,10 +1,10 @@
 import { FfmpegCommand } from 'fluent-ffmpeg';
 
-export function configure (ffmpeg: FfmpegCommand) : FfmpegCommand {
+export function configure (ffmpeg: FfmpegCommand, audioBitrate: number) : FfmpegCommand {
   ffmpeg
     .format('mp4')
     .noVideo()
-    .audioBitrate('256k')
+    .audioBitrate(`${audioBitrate}k`)
     .audioCodec('aac')
     .audioChannels(2)
     .outputOptions([

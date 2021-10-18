@@ -3,7 +3,7 @@ import { EOL } from 'os';
 import path from 'path';
 import pc from 'picocolors';
 import ProgressBar from 'progress';
-import { ffmpegWithCodec } from './presets';
+import { EncoderOptions, ffmpegWithCodec } from './presets';
 
 function log (message: string) {
   console.log(`${pc.magenta('[ffmpeg]')} ${message}`);
@@ -21,13 +21,13 @@ function createProgressBar () : ProgressBar {
   );
 }
 
-export function encode (file: string, codec: string) {
+export function encode (file: string, codec: string, options: EncoderOptions) {
   return new Promise((resolve, reject) => {
     const extname = path.extname(file);
     const destination = file.replace(new RegExp(`${extname}$`), `.${codec}`);
     let bar : ProgressBar;
 
-    ffmpegWithCodec(ffmpeg(file), codec)
+    ffmpegWithCodec(ffmpeg(file), codec, options)
       .on('start', (commandLine) => {
         log(`Spawn with the command ${pc.gray(pc.italic(commandLine))}`);
       })
