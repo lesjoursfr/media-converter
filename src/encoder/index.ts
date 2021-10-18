@@ -1,4 +1,5 @@
 import ffmpeg from 'fluent-ffmpeg';
+import { EOL } from 'os';
 import path from 'path';
 import pc from 'picocolors';
 import ProgressBar from 'progress';
@@ -33,10 +34,10 @@ export function encode (file: string, codec: string) {
       .on('codecData', function (data) {
         if (data.video) {
           log('The input is a video file :' +
-            pc.gray(`\n\t- format : ${data.format}\n\t- duration : ${data.duration}\n\t- audio : ${data.audio_details}\n\t- video : ${data.video_details}`));
+            pc.gray(`${EOL}\t- format : ${data.format}${EOL}\t- duration : ${data.duration}${EOL}\t- audio : ${data.audio_details}${EOL}\t- video : ${data.video_details}`));
         } else {
           log('The input is an audio file :' +
-            pc.gray(`\n\t- format : ${data.format}\n\t- duration : ${data.duration}\n\t- audio : ${data.audio_details}`));
+            pc.gray(`${EOL}\t- format : ${data.format}${EOL}\t- duration : ${data.duration}${EOL}\t- audio : ${data.audio_details}`));
         }
       })
       .on('progress', function (progress) {
@@ -50,7 +51,7 @@ export function encode (file: string, codec: string) {
         reject(err);
       })
       .on('end', function (stdout, stderr) {
-        log(`Conversion complete : ${pc.gray(destination)}`);
+        log(`${EOL}Conversion complete : ${pc.gray(destination)}`);
         resolve(stdout);
       })
       .save(file.replace(new RegExp(`${extname}$`), `.${codec}`));
