@@ -37,9 +37,9 @@
 	"devDependencies": {
 		"@tsconfig/node14": "^1.0.1",
 		"@types/fluent-ffmpeg": "^2.1.18",
-		"@types/node": "^16.10.9",
+		"@types/node": "^16.11.1",
 		"@types/progress": "^2.0.5",
-		"@types/yargs": "^17.0.3",
+		"@types/yargs": "^17.0.4",
 		"@typescript-eslint/eslint-plugin": "^5.0.0",
 		"@typescript-eslint/parser": "^5.0.0",
 		"eslint": "^7.32.0",
