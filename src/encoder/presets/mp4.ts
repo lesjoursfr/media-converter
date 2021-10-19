@@ -24,6 +24,7 @@ export function configure (ffmpeg: FfmpegCommand, audioBitrate: number, videoBit
     '-preset veryslow', // A preset is a collection of options that will provide a certain encoding speed to compression ratio. A slower preset will provide better compression (compression is quality per filesize).
     `-minrate ${Math.floor(videoBitrate / 8)}k`, // (minsection-pct) Set GOP min bitrate in bits/s. Note vpxenc’s option is specified as a percentage of the target bitrate, the libvpx wrapper converts this value as follows: (minrate * 100 / bitrate)
     `-maxrate ${Math.floor(videoBitrate * 1.5)}k`, // (maxsection-pct) Set GOP max bitrate in bits/s. Note vpxenc’s option is specified as a percentage of the target bitrate, the libvpx wrapper converts this value as follows: (maxrate * 100 / bitrate)
+    '-force_key_frames expr:eq(n,0)', // Force the encoder to use a keyframe for the first frame
     '-movflags +faststart' // You can add -movflags +faststart as an output option if your videos are going to be viewed in a browser.
   ]);
 

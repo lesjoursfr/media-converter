@@ -30,7 +30,8 @@ export function configure (ffmpeg: FfmpegCommand, audioBitrate: number, videoBit
     '-slices 4', // Note that FFmpeg’s slices option gives the total number of partitions, while vpxenc’s token-parts is given as log2(partitions) (0-3 : recommended 0 for small images, 2 or 3 for HD))
     '-static-thresh 0', // The static threshold imposes a change threshold on blocks below which they will be skipped by the encoder. In most scenarios this value should be set to 0.
     '-qmin 0', // (valid values 0-63, recommended value 0-4)
-    '-qmax 60' // (valid values --min-q to 63, recommended value 50-63)
+    '-qmax 60', // (valid values --min-q to 63, recommended value 50-63)
+    '-force_key_frames expr:eq(n,0)' // Force the encoder to use a keyframe for the first frame
   ]);
 
   return ffmpeg;
