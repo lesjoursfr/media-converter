@@ -18,6 +18,32 @@ Usage
 ljconverter audio sound.wav
 ```
 
+To change the audio bitrate you can pass the target bitrate in kbps to the `audiobitrate` parameter.
+
+```bash
+ljconverter audio sound.wav --audiobitrate 128
+```
+
 ## Video
 
-Not yet implemented.
+The video converter output 2 files :
+ - An mp4 file with ACC @ 256kbps & H.264 @ 4000kbps
+ - A webm file with Opus @ 256kbps & VP9 @ 4000kbps
+
+Usage
+
+```bash
+ljconverter video video.mts
+```
+
+To change the audio and video bitrates you can pass the targets bitrates in kbps to `audiobitrate` & `videobitrate` parameters.
+
+```bash
+ljconverter video video.mts --audiobitrate 128 --videobitrate 2000
+```
+
+You can also resize the video with the `resize` parameter.
+
+```bash
+ljconverter video video.mts --resize 720x?
+```
