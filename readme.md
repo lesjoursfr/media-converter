@@ -42,7 +42,7 @@ To change the audio and video bitrates you can pass the targets bitrates in kbps
 ljconverter video video.mts --audiobitrate 128 --videobitrate 2000
 ```
 
-You can also resize the video with the `resize` parameter.
+You can also resize the video with the `resize` parameter (see the [fluent-ffmpeg frame size options](https://github.com/fluent-ffmpeg/node-fluent-ffmpeg#sizesize-set-output-frame-size) for all available formats)
 
 ```bash
 ljconverter video video.mts --resize 720x?
