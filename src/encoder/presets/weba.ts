@@ -1,6 +1,6 @@
 import { FfmpegCommand } from 'fluent-ffmpeg';
 
-export function configure (ffmpeg: FfmpegCommand, audioBitrate: number) : FfmpegCommand {
+export function configure (ffmpeg: FfmpegCommand, audioBitrate: number): FfmpegCommand {
   ffmpeg
     .format('webm')
     .noVideo()
@@ -14,4 +14,4 @@ export function configure (ffmpeg: FfmpegCommand, audioBitrate: number) : Ffmpeg
     ]);
 
   return ffmpeg;
-};
+}

@@ -24,7 +24,7 @@ export enum Codecs {
 }
 /* eslint-enable no-unused-vars */
 
-export function ffmpegWithCodec (ffmpeg: FfmpegCommand, codec: string, options: EncoderOptions) : FfmpegCommand {
+export function ffmpegWithCodec (ffmpeg: FfmpegCommand, codec: string, options: EncoderOptions): FfmpegCommand {
   switch (codec) {
     // Audio codecs
     case Codecs.m4a:

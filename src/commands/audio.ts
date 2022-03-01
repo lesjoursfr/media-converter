@@ -6,8 +6,8 @@ type Options = {
   audiobitrate?: number;
 };
 
-export const command: string = 'audio <file>';
-export const desc: string = 'Convert the audio file';
+export const command = 'audio <file>';
+export const desc = 'Convert the audio file';
 
 export const builder = (yargs: Argv): Argv => {
   return yargs

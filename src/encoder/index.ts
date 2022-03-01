@@ -9,7 +9,7 @@ function log (message: string) {
   console.log(`${pc.magenta('[ffmpeg]')} ${message}`);
 }
 
-function createProgressBar () : ProgressBar {
+function createProgressBar (): ProgressBar {
   return new ProgressBar(
     `${pc.magenta('[ffmpeg]')} Processing : [${pc.gray(':bar')}] ${pc.magenta(':percent')} - ETA : ${pc.magenta(':etas')}`,
     {
@@ -25,7 +25,7 @@ export function encode (file: string, codec: string, options: EncoderOptions) {
   return new Promise((resolve, reject) => {
     const extname = path.extname(file);
     const destination = file.replace(new RegExp(`${extname}$`), `.${codec}`);
-    let bar : ProgressBar;
+    let bar: ProgressBar;
 
     ffmpegWithCodec(ffmpeg(file), codec, options)
       .on('start', (commandLine) => {
@@ -47,10 +47,10 @@ export function encode (file: string, codec: string, options: EncoderOptions) {
 
         bar.update(progress.percent / 100);
       })
-      .on('error', function (err, stdout, stderr) {
+      .on('error', function (err) {
         reject(err);
       })
-      .on('end', function (stdout, stderr) {
+      .on('end', function (stdout) {
         log(`${EOL}Conversion complete : ${pc.gray(destination)}`);
         resolve(stdout);
       })

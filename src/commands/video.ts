@@ -8,8 +8,8 @@ type Options = {
   resize: string | undefined;
 };
 
-export const command: string = 'video <file>';
-export const desc: string = 'Convert the video file';
+export const command = 'video <file>';
+export const desc = 'Convert the video file';
 
 export const builder = (yargs: Argv): Argv => {
   return yargs

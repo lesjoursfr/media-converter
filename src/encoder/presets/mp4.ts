@@ -1,6 +1,6 @@
 import { FfmpegCommand } from 'fluent-ffmpeg';
 
-export function configure (ffmpeg: FfmpegCommand, audioBitrate: number, videoBitrate: number, size: string | undefined) : FfmpegCommand {
+export function configure (ffmpeg: FfmpegCommand, audioBitrate: number, videoBitrate: number, size: string | undefined): FfmpegCommand {
   ffmpeg
     .format('mp4')
     .videoBitrate(`${videoBitrate}k`)
@@ -29,4 +29,4 @@ export function configure (ffmpeg: FfmpegCommand, audioBitrate: number, videoBit
   ]);
 
   return ffmpeg;
-};
+}
