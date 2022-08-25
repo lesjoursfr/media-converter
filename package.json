@@ -1,6 +1,6 @@
 {
 	"name": "@lesjoursfr/media-converter",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "CLI for the fluent-ffmpeg npm module.",
 	"keywords": [
 		"cli",
