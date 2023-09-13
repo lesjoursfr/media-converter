@@ -4,7 +4,8 @@ export function configure(
   ffmpeg: FfmpegCommand,
   audioBitrate: number,
   videoBitrate: number,
-  size: string | undefined
+  size: string | undefined,
+  framerate: number | undefined
 ): FfmpegCommand {
   ffmpeg
     .format("webm")
@@ -16,6 +17,10 @@ export function configure(
 
   if (size !== undefined) {
     ffmpeg.size(size).autopad();
+  }
+
+  if (framerate !== undefined) {
+    ffmpeg.fps(framerate);
   }
 
   ffmpeg.outputOptions([

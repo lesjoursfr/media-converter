@@ -11,6 +11,7 @@ export type EncoderOptions = {
   audioBitrate?: number;
   videoBitrate?: number;
   resize?: string;
+  framerate?: number;
 };
 
 /* eslint-disable no-unused-vars */
@@ -37,14 +38,16 @@ export function ffmpegWithCodec(ffmpeg: FfmpegCommand, codec: string, options: E
         ffmpeg,
         options.audioBitrate || defaultAudioBitrate,
         options.videoBitrate || defaultVideoBitrate,
-        options.resize
+        options.resize,
+        options.framerate
       );
     case Codecs.webm:
       return webm(
         ffmpeg,
         options.audioBitrate || defaultAudioBitrate,
         options.videoBitrate || defaultVideoBitrate,
-        options.resize
+        options.resize,
+        options.framerate
       );
     // Unknown codec : Throw an error
     default:

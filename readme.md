@@ -48,3 +48,9 @@ You can also resize the video with the `resize` parameter (see the [fluent-ffmpe
 ```bash
 ljconverter video video.mts --resize 720x?
 ```
+
+You can also change the framerate of the video with the `framerate` parameter
+
+```bash
+ljconverter video video.mts --framerate 30
+```

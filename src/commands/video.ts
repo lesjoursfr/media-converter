@@ -6,6 +6,7 @@ type Options = {
   audiobitrate: number | undefined;
   videobitrate: number | undefined;
   resize: string | undefined;
+  framerate: number | undefined;
 };
 
 export const command = "video <file>";
@@ -29,20 +30,34 @@ export const builder = (yargs: Argv): Argv => {
     .option("resize", {
       type: "string",
       describe: "The target size for the video (640x480, 640x?, ?x480)",
+    })
+    .option("framerate", {
+      type: "number",
+      describe: "The target framerate for the video (in fps)",
     });
 };
 
 export const handler = async (argv: Arguments<Options>): Promise<void> => {
-  const { file, audiobitrate, videobitrate, resize } = argv;
+  const { file, audiobitrate, videobitrate, resize, framerate } = argv;
 
   try {
     // Convert the file to mp4
     console.log("Convert the file to mp4");
-    await encode(file, "mp4", { audioBitrate: audiobitrate, videoBitrate: videobitrate, resize: resize });
+    await encode(file, "mp4", {
+      audioBitrate: audiobitrate,
+      videoBitrate: videobitrate,
+      resize: resize,
+      framerate: framerate,
+    });
 
     // Convert the file to webm
     console.log("Convert the file to webm");
-    await encode(file, "webm", { audioBitrate: audiobitrate, videoBitrate: videobitrate, resize: resize });
+    await encode(file, "webm", {
+      audioBitrate: audiobitrate,
+      videoBitrate: videobitrate,
+      resize: resize,
+      framerate: framerate,
+    });
 
     process.exit(0);
   } catch (err) {
