@@ -14,7 +14,6 @@ export type EncoderOptions = {
   framerate?: number;
 };
 
-/* eslint-disable no-unused-vars */
 export enum Codecs {
   // Audio codecs
   m4a = "m4a",
@@ -23,7 +22,6 @@ export enum Codecs {
   mp4 = "mp4",
   webm = "webm",
 }
-/* eslint-enable no-unused-vars */
 
 export function ffmpegWithCodec(ffmpeg: FfmpegCommand, codec: string, options: EncoderOptions): FfmpegCommand {
   switch (codec) {
