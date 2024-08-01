@@ -23,6 +23,26 @@ function createProgressBar(): ProgressBar {
   );
 }
 
+type AudioCodecData = {
+  format: string;
+  duration: string;
+  audio: string;
+  audio_details: string;
+};
+type VideoCodecData = {
+  format: string;
+  duration: string;
+  audio: string;
+  audio_details: string;
+  video: string;
+  video_details: string;
+};
+type CodecData = AudioCodecData | VideoCodecData;
+
+function isVideoCodecData(codecData: CodecData): codecData is VideoCodecData {
+  return typeof (codecData as VideoCodecData).video === "string";
+}
+
 export function encode(file: string, codec: string, options: EncoderOptions) {
   return new Promise((resolve, reject) => {
     const extname = path.extname(file);
@@ -34,18 +54,20 @@ export function encode(file: string, codec: string, options: EncoderOptions) {
         log(`Spawn with the command ${pc.gray(pc.italic(commandLine))}`);
       })
       .on("codecData", function (data) {
-        if (data.video) {
+        const codecData = data as CodecData; // Fix typings
+
+        if (isVideoCodecData(codecData)) {
           log(
             "The input is a video file :" +
               pc.gray(
-                `${EOL}\t- format : ${data.format}${EOL}\t- duration : ${data.duration}${EOL}\t- audio : ${data.audio_details}${EOL}\t- video : ${data.video_details}`
+                `${EOL}\t- format : ${codecData.format}${EOL}\t- duration : ${codecData.duration}${EOL}\t- audio : ${codecData.audio_details}${EOL}\t- video : ${codecData.video_details}`
               )
           );
         } else {
           log(
             "The input is an audio file :" +
               pc.gray(
-                `${EOL}\t- format : ${data.format}${EOL}\t- duration : ${data.duration}${EOL}\t- audio : ${data.audio_details}`
+                `${EOL}\t- format : ${codecData.format}${EOL}\t- duration : ${codecData.duration}${EOL}\t- audio : ${codecData.audio_details}`
               )
           );
         }
@@ -55,7 +77,7 @@ export function encode(file: string, codec: string, options: EncoderOptions) {
           bar = createProgressBar();
         }
 
-        bar.update(progress.percent / 100);
+        bar.update((progress.percent ?? 0) / 100);
       })
       .on("error", function (err) {
         reject(err);
