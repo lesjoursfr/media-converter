@@ -43,7 +43,7 @@
 	"devDependencies": {
 		"@eslint/js": "^9.8.0",
 		"@tsconfig/node20": "^20.1.4",
-		"@types/fluent-ffmpeg": "^2.1.24",
+		"@types/fluent-ffmpeg": "^2.1.25",
 		"@types/node": "^20.14.13",
 		"@types/progress": "^2.0.7",
 		"@types/yargs": "^17.0.32",
@@ -53,7 +53,7 @@
 		"prettier": "^3.3.3",
 		"ts-node": "^10.9.2",
 		"typescript": "^5.5.4",
-		"typescript-eslint": "^8.0.0-alpha.55"
+		"typescript-eslint": "^8.0.0"
 	},
 	"packageManager": "yarn@4.3.1"
 }
