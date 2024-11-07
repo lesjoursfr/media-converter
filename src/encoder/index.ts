@@ -25,17 +25,17 @@ function createProgressBar(): ProgressBar {
 
 type AudioCodecData = {
   format: string;
-  duration: string;
   audio: string;
-  audio_details: string;
+  audio_details: Array<string>;
+  duration: string;
 };
 type VideoCodecData = {
   format: string;
-  duration: string;
   audio: string;
-  audio_details: string;
+  audio_details: Array<string>;
   video: string;
-  video_details: string;
+  video_details: Array<string>;
+  duration: string;
 };
 type CodecData = AudioCodecData | VideoCodecData;
 
@@ -60,14 +60,14 @@ export function encode(file: string, codec: string, options: EncoderOptions) {
           log(
             "The input is a video file :" +
               pc.gray(
-                `${EOL}\t- format : ${codecData.format}${EOL}\t- duration : ${codecData.duration}${EOL}\t- audio : ${codecData.audio_details}${EOL}\t- video : ${codecData.video_details}`
+                `${EOL}\t- format : ${codecData.format}${EOL}\t- duration : ${codecData.duration}${EOL}\t- audio : ${codecData.audio_details.join(", ")}${EOL}\t- video : ${codecData.video_details.join(", ")}`
               )
           );
         } else {
           log(
             "The input is an audio file :" +
               pc.gray(
-                `${EOL}\t- format : ${codecData.format}${EOL}\t- duration : ${codecData.duration}${EOL}\t- audio : ${codecData.audio_details}`
+                `${EOL}\t- format : ${codecData.format}${EOL}\t- duration : ${codecData.duration}${EOL}\t- audio : ${codecData.audio_details.join(", ")}`
               )
           );
         }
