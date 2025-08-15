@@ -7,6 +7,7 @@ type Options = {
   videobitrate: number | undefined;
   resize: string | undefined;
   framerate: number | undefined;
+  deinterlace: boolean;
 };
 
 export const command = "video <file>";
@@ -34,11 +35,15 @@ export const builder = (yargs: Argv): Argv => {
     .option("framerate", {
       type: "number",
       describe: "The target framerate for the video (in fps)",
+    })
+    .option("deinterlace", {
+      type: "boolean",
+      describe: "Deinterlace the video",
     });
 };
 
 export const handler = async (argv: Arguments<Options>): Promise<void> => {
-  const { file, audiobitrate, videobitrate, resize, framerate } = argv;
+  const { file, audiobitrate, videobitrate, resize, framerate, deinterlace } = argv;
 
   try {
     // Convert the file to mp4
@@ -48,6 +53,7 @@ export const handler = async (argv: Arguments<Options>): Promise<void> => {
       videoBitrate: videobitrate,
       resize: resize,
       framerate: framerate,
+      deinterlace: deinterlace,
     });
 
     // Convert the file to webm
@@ -57,6 +63,7 @@ export const handler = async (argv: Arguments<Options>): Promise<void> => {
       videoBitrate: videobitrate,
       resize: resize,
       framerate: framerate,
+      deinterlace: deinterlace,
     });
 
     process.exit(0);

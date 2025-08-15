@@ -5,7 +5,8 @@ export function configure(
   audioBitrate: number,
   videoBitrate: number,
   size: string | undefined,
-  framerate: number | undefined
+  framerate: number | undefined,
+  deinterlace: boolean | undefined
 ): FfmpegCommand {
   ffmpeg
     .format("mp4")
@@ -14,6 +15,15 @@ export function configure(
     .audioBitrate(`${audioBitrate}k`)
     .audioCodec("aac")
     .audioChannels(2);
+
+  if (deinterlace) {
+    ffmpeg.videoFilter([
+      {
+        filter: "bwdif",
+        options: { mode: "send_frame" },
+      },
+    ]);
+  }
 
   if (size !== undefined) {
     ffmpeg.size(size).autopad();
