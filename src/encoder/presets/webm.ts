@@ -6,15 +6,16 @@ export function configure(
   videoBitrate: number,
   size: string | undefined,
   framerate: number | undefined,
-  deinterlace: boolean | undefined
+  deinterlace: boolean | undefined,
+  noAudio: boolean | undefined
 ): FfmpegCommand {
-  ffmpeg
-    .format("webm")
-    .videoBitrate(`${videoBitrate}k`)
-    .videoCodec("libvpx-vp9")
-    .audioBitrate(`${audioBitrate}k`)
-    .audioCodec("libopus")
-    .audioChannels(2);
+  ffmpeg.format("webm").videoBitrate(`${videoBitrate}k`).videoCodec("libvpx-vp9");
+
+  if (noAudio === true) {
+    ffmpeg.noAudio();
+  } else {
+    ffmpeg.audioBitrate(`${audioBitrate}k`).audioCodec("libopus").audioChannels(2);
+  }
 
   if (deinterlace) {
     ffmpeg.videoFilter([

@@ -13,6 +13,7 @@ export type EncoderOptions = {
   resize?: string;
   framerate?: number;
   deinterlace?: boolean;
+  noAudio?: boolean;
 };
 
 export enum Codecs {
@@ -39,7 +40,8 @@ export function ffmpegWithCodec(ffmpeg: FfmpegCommand, codec: string, options: E
         options.videoBitrate || defaultVideoBitrate,
         options.resize,
         options.framerate,
-        options.deinterlace
+        options.deinterlace,
+        options.noAudio
       );
     case Codecs.webm:
       return webm(
@@ -48,7 +50,8 @@ export function ffmpegWithCodec(ffmpeg: FfmpegCommand, codec: string, options: E
         options.videoBitrate || defaultVideoBitrate,
         options.resize,
         options.framerate,
-        options.deinterlace
+        options.deinterlace,
+        options.noAudio
       );
     // Unknown codec : Throw an error
     default:

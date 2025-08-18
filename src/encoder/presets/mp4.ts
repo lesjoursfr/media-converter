@@ -6,15 +6,16 @@ export function configure(
   videoBitrate: number,
   size: string | undefined,
   framerate: number | undefined,
-  deinterlace: boolean | undefined
+  deinterlace: boolean | undefined,
+  noAudio: boolean | undefined
 ): FfmpegCommand {
-  ffmpeg
-    .format("mp4")
-    .videoBitrate(`${videoBitrate}k`)
-    .videoCodec("libx264")
-    .audioBitrate(`${audioBitrate}k`)
-    .audioCodec("aac")
-    .audioChannels(2);
+  ffmpeg.format("mp4").videoBitrate(`${videoBitrate}k`).videoCodec("libx264");
+
+  if (noAudio === true) {
+    ffmpeg.noAudio();
+  } else {
+    ffmpeg.audioBitrate(`${audioBitrate}k`).audioCodec("aac").audioChannels(2);
+  }
 
   if (deinterlace) {
     ffmpeg.videoFilter([
