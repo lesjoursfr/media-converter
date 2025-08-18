@@ -37,10 +37,21 @@ type VideoCodecData = {
   video_details: Array<string>;
   duration: string;
 };
-type CodecData = AudioCodecData | VideoCodecData;
+type VideoOnlyCodecData = {
+  format: string;
+  audio: "";
+  video: string;
+  video_details: Array<string>;
+  duration: string;
+};
+type CodecData = AudioCodecData | VideoCodecData | VideoOnlyCodecData;
 
-function isVideoCodecData(codecData: CodecData): codecData is VideoCodecData {
+function isVideoCodecData(codecData: CodecData): codecData is VideoCodecData | VideoOnlyCodecData {
   return typeof (codecData as VideoCodecData).video === "string";
+}
+
+function isVideoOnlyCodecData(codecData: VideoCodecData | VideoOnlyCodecData): codecData is VideoOnlyCodecData {
+  return codecData.audio === "" && (codecData as VideoCodecData).audio_details === undefined;
 }
 
 export function encode(file: string, codec: string, options: EncoderOptions) {
@@ -57,12 +68,21 @@ export function encode(file: string, codec: string, options: EncoderOptions) {
         const codecData = data as CodecData; // Fix typings
 
         if (isVideoCodecData(codecData)) {
-          log(
-            "The input is a video file :" +
-              pc.gray(
-                `${EOL}\t- format : ${codecData.format}${EOL}\t- duration : ${codecData.duration}${EOL}\t- audio : ${codecData.audio_details.join(", ")}${EOL}\t- video : ${codecData.video_details.join(", ")}`
-              )
-          );
+          if (isVideoOnlyCodecData(codecData)) {
+            log(
+              "The input is a video file :" +
+                pc.gray(
+                  `${EOL}\t- format : ${codecData.format}${EOL}\t- duration : ${codecData.duration}${EOL}\t- audio : [NO AUDIO TRACK]${EOL}\t- video : ${codecData.video_details.join(", ")}`
+                )
+            );
+          } else {
+            log(
+              "The input is a video file :" +
+                pc.gray(
+                  `${EOL}\t- format : ${codecData.format}${EOL}\t- duration : ${codecData.duration}${EOL}\t- audio : ${codecData.audio_details.join(", ")}${EOL}\t- video : ${codecData.video_details.join(", ")}`
+                )
+            );
+          }
         } else {
           log(
             "The input is an audio file :" +
